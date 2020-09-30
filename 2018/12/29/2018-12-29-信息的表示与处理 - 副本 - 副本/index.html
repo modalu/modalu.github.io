@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>第2章 信息的表示与处理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第2章 信息表示与处理无符号(unsigned) 补码(two’s compliments) 浮点数(floating point) 2.1 信息的存储最小可寻址的内存单位： byte虚拟内存：一串非常大的字节数组虚拟地址空间：所有地址的集合 ####16进制表示16进制表示法：0x(0~F), 既解决了二进制表示法的冗长问题，也解决了十进制表示法与位模式转化困难的问题字长(word size):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第2章 信息的表示与处理">
+<meta property="og:url" content="http://example.com/2018/12/29/2018-12-29-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86%20-%20%E5%89%AF%E6%9C%AC%20-%20%E5%89%AF%E6%9C%AC/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第2章 信息表示与处理无符号(unsigned) 补码(two’s compliments) 浮点数(floating point) 2.1 信息的存储最小可寻址的内存单位： byte虚拟内存：一串非常大的字节数组虚拟地址空间：所有地址的集合 ####16进制表示16进制表示法：0x(0~F), 既解决了二进制表示法的冗长问题，也解决了十进制表示法与位模式转化困难的问题字长(word size):">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/modalu/modalu.github.io/master/img/post-bg-bytes.png">
+<meta property="article:published_time" content="2018-12-28T13:00:00.000Z">
+<meta property="article:modified_time" content="2019-09-29T05:31:48.956Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/modalu/modalu.github.io/master/img/post-bg-bytes.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018-12-29-信息的表示与处理 - 副本 - 副本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/29/2018-12-29-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86%20-%20%E5%89%AF%E6%9C%AC%20-%20%E5%89%AF%E6%9C%AC/" class="article-date">
+  <time datetime="2018-12-28T13:00:00.000Z" itemprop="datePublished">2018-12-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第2章 信息的表示与处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第2章-信息表示与处理"><a href="#第2章-信息表示与处理" class="headerlink" title="第2章 信息表示与处理"></a>第2章 信息表示与处理</h2><p>无符号(unsigned)</p>
+<p>补码(two’s compliments)</p>
+<p>浮点数(floating point)</p>
+<h3 id="2-1-信息的存储"><a href="#2-1-信息的存储" class="headerlink" title="2.1 信息的存储"></a>2.1 信息的存储</h3><p>最小可寻址的内存单位： byte<br><br>虚拟内存：一串非常大的字节数组<br><br>虚拟地址空间：所有地址的集合</p>
+<p>####16进制表示<br>16进制表示法：0x(0~F), 既解决了二进制表示法的冗长问题，也解决了十进制表示法与位模式转化困难的问题<br><br>字长(word size): 虚拟地址空间的最大大小<br><br>虚拟地址空间的由字长大小限制</p>
+<p>32位字长：(2^32)4千兆字节<br><br>64位字长：(2^64)1.84*10^19</p>
+<h4 id="字数据大小"><a href="#字数据大小" class="headerlink" title="字数据大小"></a>字数据大小</h4><p>C 语言不同数据类型分配的字节数。</p>
+<p><img src="https://raw.githubusercontent.com/modalu/modalu.github.io/master/img/post-bg-bytes.png"></p>
+<p>程序员应该力图使他们的程序在不同的机器和编译器上可移植。</p>
+<h4 id="寻址和字节序列"><a href="#寻址和字节序列" class="headerlink" title="寻址和字节序列"></a>寻址和字节序列</h4><p>连续的地址序列：0x100, 0x101, 0x102, 0x103….<br><br>int a = 0x12345678<br><br>大端模式：最高有效字节在地址序列最前面，用于大多数intel兼容机<br><br>12 34 56 78 <br><br>小端模式：最低有效字节在地址序列最后面，用于Android, Apple系统<br><br>78 56 34 12 </p>
+<h4 id="bool-代数"><a href="#bool-代数" class="headerlink" title="bool 代数"></a>bool 代数</h4><p>&amp; : and <br><br>| : or <br><br>~ : not <br><br>^ : exclusive or </p>
+<p>加法逆元： x ^ x = 0，加法逆元是其本身</p>
+<p>位向量：可以用来表示有限集合<br><br>e.g. a = [01101001] 可以用来表示有限集合 A =[0 3 5 6];<br></p>
+<p>位级运算<br></p>
+<ol>
+<li><p>交换运算：<br><br>int inplace_swap(int *x, int *y){<br><br> *y = *x ^ *y; <br><br> *x = *x ^ *y; <br><br> *y = *x ^ *y; <br><br>}</p>
+</li>
+<li><p>掩码的应用 <br><br>掩码：0xFF <br><br>0x89ABCDEF &amp; 0xFF = 0x000000EF <br></p>
+</li>
+<li><p>移位操作<br>左移，末尾补0 <br><br>右移：<br></p>
+</li>
+</ol>
+<ol>
+<li>逻辑右移：左端补k个零，用于无符号数<br></li>
+<li>算术右移：左端补最高有效位的值1，对于有符号整数数据的运算特别有用<br></li>
+</ol>
+<p>移位有限制，对于32位机器，移动k位, k &lt;= 32<br><br>如果k 很大，左移 k mod 32 位，例如左移 40 位，就是左移8位</p>
+<p>移位运算操作符的优先级问题<br><br>加法的优先级要大于移位<br><br>1 &lt;&lt; 2+3 &gt;&gt; 4 相当于 1 &lt;&lt; (2+3) &gt;&gt; 4;所以要养成加括号的习惯：(1&lt;&lt;2) + (3&gt;&gt;4) <br></p>
+<p>###2.2 整数的表示</p>
+<p>对于w位的机器<br><br>无符号整数：Unsigned<br><br>范围：0 ~ 2^w - 1</p>
+<p>补码：Two’s complement <br><br>Tmax = 2^(w-1)-1 <br><br>Tmin = -2^(w-1) <br><br>|Tmin| = |Tmax| + 1</p>
+<p>有符号数和无符号数之间的转换：<br><br>位模式保持不变，但表示出的十进制数值有可能改变</p>
+<p>在一个运算式中，如果有一个运算数是无符号的，另一个是有符号的，有符号数的会被隐性的转换成无符号数，造成非直观的结果。<br><br>-1 &lt; 0u; 在32位机器中，-1被的位模式被解读成无符号数，2^32-1 &lt; 0u, 得到的结果就是 0.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/29/2018-12-29-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86%20-%20%E5%89%AF%E6%9C%AC%20-%20%E5%89%AF%E6%9C%AC/" data-id="ckfpf260z000164u8avpwab6z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" rel="tag">计算机系统</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/28/2020-09-27-%E7%AE%97%E6%B3%954%20part1-8%20puzzles%20-%20%E5%89%AF%E6%9C%AC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          算法4 part I 作业： 8 puzzles
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/29/2020-09-28-%E6%95%A3%E5%88%97%E8%A1%A8(hashtable)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">散列表(hash table)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithms-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Algorithms 学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithms%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Algorithms，学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" rel="tag">计算机系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithms-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">Algorithms 学习笔记</a> <a href="/tags/Algorithms%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">Algorithms，学习笔记</a> <a href="/tags/test/" style="font-size: 20px;">test</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" style="font-size: 20px;">计算机系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/30/iamge/">iamge</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/30/imageblog/">imageblog</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/28/2020-09-27-%E7%AE%97%E6%B3%954%20part1-8%20puzzles%20-%20%E5%89%AF%E6%9C%AC/">算法4 part I 作业： 8 puzzles</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/29/2018-12-29-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86%20-%20%E5%89%AF%E6%9C%AC%20-%20%E5%89%AF%E6%9C%AC/">第2章 信息的表示与处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

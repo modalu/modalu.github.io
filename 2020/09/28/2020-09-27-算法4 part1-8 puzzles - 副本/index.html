@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>算法4 part I 作业： 8 puzzles | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Coursera: 算法4 part 1  Assigment 4 - 8 puzzles 解法Specification：https:&#x2F;&#x2F;coursera.cs.princeton.edu&#x2F;algs4&#x2F;assignments&#x2F;8puzzle&#x2F;specification.php 这对我来说是一道非常难的作业，很多提供的方法我都看不懂它究竟要实现啥，比如Board twin(), Iterable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法4 part I 作业： 8 puzzles">
+<meta property="og:url" content="http://example.com/2020/09/28/2020-09-27-%E7%AE%97%E6%B3%954%20part1-8%20puzzles%20-%20%E5%89%AF%E6%9C%AC/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Coursera: 算法4 part 1  Assigment 4 - 8 puzzles 解法Specification：https:&#x2F;&#x2F;coursera.cs.princeton.edu&#x2F;algs4&#x2F;assignments&#x2F;8puzzle&#x2F;specification.php 这对我来说是一道非常难的作业，很多提供的方法我都看不懂它究竟要实现啥，比如Board twin(), Iterable">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/.com//Users/modal/OneDrive/Documents/blog/source/assets/img/8_puzzle.png">
+<meta property="article:published_time" content="2020-09-28T11:56:45.000Z">
+<meta property="article:modified_time" content="2020-09-30T11:36:36.884Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Algorithms 学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/.com//Users/modal/OneDrive/Documents/blog/source/assets/img/8_puzzle.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2020-09-27-算法4 part1-8 puzzles - 副本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/28/2020-09-27-%E7%AE%97%E6%B3%954%20part1-8%20puzzles%20-%20%E5%89%AF%E6%9C%AC/" class="article-date">
+  <time datetime="2020-09-28T11:56:45.000Z" itemprop="datePublished">2020-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      算法4 part I 作业： 8 puzzles
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Coursera-算法4-part-1-Assigment-4-8-puzzles-解法"><a href="#Coursera-算法4-part-1-Assigment-4-8-puzzles-解法" class="headerlink" title="Coursera: 算法4 part 1  Assigment 4 - 8 puzzles 解法"></a>Coursera: 算法4 part 1  Assigment 4 - 8 puzzles 解法</h2><p>Specification：<a target="_blank" rel="noopener" href="https://coursera.cs.princeton.edu/algs4/assignments/8puzzle/specification.php">https://coursera.cs.princeton.edu/algs4/assignments/8puzzle/specification.php</a></p>
+<p>这对我来说是一道非常难的作业，很多提供的方法我都看不懂它究竟要实现啥，比如Board twin(), Iterable<Board> neighbors(), boolean equals(Object y)。直到我发现课程官方原来提供了checklist教我怎么去实现他们。checklist url : <a target="_blank" rel="noopener" href="https://www.cs.princeton.edu/courses/archive/spr10/cos226/checklist/8puzzle.html">https://www.cs.princeton.edu/courses/archive/spr10/cos226/checklist/8puzzle.html</a></Board></p>
+<h3 id="作业内容"><a href="#作业内容" class="headerlink" title="作业内容"></a>作业内容</h3><p>8 puzzle是 8数码问题，是指在3*3的方格盘上有8个数字块 1 ~ 8, 还有一个空格块用来移动方格。目标是通过移动最少的步数使得初始的board 能达到目标board。</p>
+<p><img src="/.com//Users\modal\OneDrive\Documents\blog\source\assets\img\8_puzzle.png"></p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/28/2020-09-27-%E7%AE%97%E6%B3%954%20part1-8%20puzzles%20-%20%E5%89%AF%E6%9C%AC/" data-id="ckfpf2613000564u8cbr1dbsp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithms-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Algorithms 学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/30/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/29/2018-12-29-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86%20-%20%E5%89%AF%E6%9C%AC%20-%20%E5%89%AF%E6%9C%AC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">第2章 信息的表示与处理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithms-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Algorithms 学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithms%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Algorithms，学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" rel="tag">计算机系统</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithms-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">Algorithms 学习笔记</a> <a href="/tags/Algorithms%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">Algorithms，学习笔记</a> <a href="/tags/test/" style="font-size: 20px;">test</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" style="font-size: 20px;">计算机系统</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/30/iamge/">iamge</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/30/imageblog/">imageblog</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/28/2020-09-27-%E7%AE%97%E6%B3%954%20part1-8%20puzzles%20-%20%E5%89%AF%E6%9C%AC/">算法4 part I 作业： 8 puzzles</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/29/2018-12-29-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86%20-%20%E5%89%AF%E6%9C%AC%20-%20%E5%89%AF%E6%9C%AC/">第2章 信息的表示与处理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
