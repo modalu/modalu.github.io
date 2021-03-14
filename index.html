@@ -178,14 +178,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="动态规划解题套路模板"><a href="#动态规划解题套路模板" class="headerlink" title="动态规划解题套路模板"></a>动态规划解题套路模板</h1><h2 id="1-一维动态规划-dp-n"><a href="#1-一维动态规划-dp-n" class="headerlink" title="1. 一维动态规划 dp[n]"></a>1. 一维动态规划 dp[n]</h2><p>Leetcode #96. Unique Binary Search Tree 题为例: </p>
+        <h1 id="动态规划解题套路模板"><a href="#动态规划解题套路模板" class="headerlink" title="动态规划解题套路模板"></a>动态规划解题套路模板</h1><h2 id="1-一维动态规划-dp-n"><a href="#1-一维动态规划-dp-n" class="headerlink" title="1. 一维动态规划 dp[n]"></a>1. 一维动态规划 dp[n]</h2><p><strong>一般步骤:</strong></p>
+<ol>
+<li><strong>Base case</strong></li>
+<li><strong>if(memo[n] != null) return memo[n]</strong></li>
+<li><strong>Ask subproblems for result</strong></li>
+<li><strong>Update memo[n] and return res</strong></li>
+</ol>
+<p>下面以 Leet Code #96. Unique Binary Search Tree 题为例: </p>
 <ol>
 <li>Initialize memo with n+1 slot</li>
 <li>Call dfs(n)；</li>
 </ol>
 <p>dfs(n)</p>
 <ol>
-<li><p>Base case n &lt;= 1, return 1</p>
+<li><p>Base case (n &lt;= 1), return 1</p>
 </li>
 <li><p>if(memo[n] != null) return memo[n]</p>
 </li>

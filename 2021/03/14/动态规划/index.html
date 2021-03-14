@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://modalu.github.io">
   <title>动态规划 | Moda&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态规划解题套路模板1. 一维动态规划 dp[n]Leetcode #96. Unique Binary Search Tree 题为例:   Initialize memo with n+1 slot Call dfs(n)；  dfs(n)  Base case n &lt;&#x3D; 1, return 1  if(memo[n] !&#x3D; null) return memo[n]  Ask subpr">
+  <meta name="description" content="动态规划解题套路模板1. 一维动态规划 dp[n]一般步骤:  Base case if(memo[n] !&#x3D; null) return memo[n] Ask subproblems for result Update memo[n] and return res  下面以 Leet Code #96. Unique Binary Search Tree 题为例:   Initialize me">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划">
 <meta property="og:url" content="https://modalu.github.io/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
 <meta property="og:site_name" content="Moda&#39;s Blog">
-<meta property="og:description" content="动态规划解题套路模板1. 一维动态规划 dp[n]Leetcode #96. Unique Binary Search Tree 题为例:   Initialize memo with n+1 slot Call dfs(n)；  dfs(n)  Base case n &lt;&#x3D; 1, return 1  if(memo[n] !&#x3D; null) return memo[n]  Ask subpr">
+<meta property="og:description" content="动态规划解题套路模板1. 一维动态规划 dp[n]一般步骤:  Base case if(memo[n] !&#x3D; null) return memo[n] Ask subproblems for result Update memo[n] and return res  下面以 Leet Code #96. Unique Binary Search Tree 题为例:   Initialize me">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-14T01:48:35.000Z">
-<meta property="article:modified_time" content="2021-03-14T05:13:40.485Z">
+<meta property="article:modified_time" content="2021-03-14T06:24:31.745Z">
 <meta property="article:author" content="Moda Lu">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -181,14 +181,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="动态规划解题套路模板"><a href="#动态规划解题套路模板" class="headerlink" title="动态规划解题套路模板"></a>动态规划解题套路模板</h1><h2 id="1-一维动态规划-dp-n"><a href="#1-一维动态规划-dp-n" class="headerlink" title="1. 一维动态规划 dp[n]"></a>1. 一维动态规划 dp[n]</h2><p>Leetcode #96. Unique Binary Search Tree 题为例: </p>
+        <h1 id="动态规划解题套路模板"><a href="#动态规划解题套路模板" class="headerlink" title="动态规划解题套路模板"></a>动态规划解题套路模板</h1><h2 id="1-一维动态规划-dp-n"><a href="#1-一维动态规划-dp-n" class="headerlink" title="1. 一维动态规划 dp[n]"></a>1. 一维动态规划 dp[n]</h2><p><strong>一般步骤:</strong></p>
+<ol>
+<li><strong>Base case</strong></li>
+<li><strong>if(memo[n] != null) return memo[n]</strong></li>
+<li><strong>Ask subproblems for result</strong></li>
+<li><strong>Update memo[n] and return res</strong></li>
+</ol>
+<p>下面以 Leet Code #96. Unique Binary Search Tree 题为例: </p>
 <ol>
 <li>Initialize memo with n+1 slot</li>
 <li>Call dfs(n)；</li>
 </ol>
 <p>dfs(n)</p>
 <ol>
-<li><p>Base case n &lt;= 1, return 1</p>
+<li><p>Base case (n &lt;= 1), return 1</p>
 </li>
 <li><p>if(memo[n] != null) return memo[n]</p>
 </li>
