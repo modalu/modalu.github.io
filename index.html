@@ -158,6 +158,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-华为机试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95/">华为机试</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95/" class="archive-article-date">
+  	<time datetime="2021-03-15T04:22:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="华为机试3-10"><a href="#华为机试3-10" class="headerlink" title="华为机试3.10"></a>华为机试3.10</h1><p>2021年3月10日参与了华为机考，下面进行复盘。</p>
+<h2 id="1-字母替换（AC"><a href="#1-字母替换（AC" class="headerlink" title="1. 字母替换（AC)"></a>1. 字母替换（AC)</h2><p>小明抽到字符串，小红抽到一个更长的，小红有限次的替换一个字母为另一个，比如最大替换次数为2。</p>
+<p>请判断小红每次游戏时候能不能成功替换字母从而包含小明的字符串，可以请输出最小替换次数，不可以或者不需要替换输出0；</p>
+<p>输入三行：<br>第一行小明的字符串<br>第二行小红的字符串(长一些)<br>第三行最大允许替换次数</p>
+<p>这道题暴力的解法时间复杂度是O(两个字符串长度的乘积)</p>
+<h2 id="2-挑选货物（10-）"><a href="#2-挑选货物（10-）" class="headerlink" title="2. 挑选货物（10%）"></a>2. 挑选货物（10%）</h2><p>一排包装箱从1编号，各个包装箱存放的货物数组成一个集合M={M1,M2,…,Mn}<br>货车一次最多运送K件货物。<br>小王想一次从中挑选K的整数倍件货物，再分批运输。<br>仓库管理员为了方便要求小王必须选择连续的包装箱，比如可选择1、2、3号箱，不能选2、4、6<br>如果运输K整数倍件货物，请帮小王计算有多少种挑选方式。</p>
+<p><strong>输入</strong>：<br>包装箱数N，货车最大一次运送的数量为K件<br>各个箱子存放的货物M1，M2，M3。。。<br>输入为两行：N K<br>M1 M2 M3。。。<br>N和K取值范围为[1,100000]<br>第i个包装箱存放货物的取值范围也是[1,100000]</p>
+<p><strong>输出</strong>：一行输出有多少种方式，如果不存在可行的方式，输出0</p>
+<p>以N = 6，K = 4为例，输出的值为3。</p>
+<p>当时这道题我没看懂，直接所有情况return 0，换了个10% 的用例通过率。后来看懂了这道题觉得很简单，如果用暴力解法，直接就可以做出，但时间复杂度会是O(NK) 。由于N K 的取值范围可以达到10万，这样做会超时。</p>
+<p>而如果换种思路，这道题是要求连续编号的货箱内货物总数是K的倍数，我们先设一个数组sum[], 它的大小为N, 其中的每一个元素sum[j] 是M数组中从0 - j 的元素（代表货箱数量）的总和，那么从货箱编号a 到货箱编号b的货物总数就是sum[b] - sum[a]。如果sum[b] 和 sum[a] 均能被 K 整除，那么这个sum[b] - sum[a]也就能被K整除，同时，如果sum[b] 和 sum[a] 分别对K取余得到的余数相等，那么sum[b] - sum[a] 也能被K整除。</p>
+<p>如此一来，我把sum[]中每一个元素都对K取余，那么sum中便留下了 N 个 范围为 0 ~ K-1的数值。在这些数值中找到相同的值的个数，就能通过组合数解法，算得不同数字对应的连续箱选择方式。非零的数字k, 它的个数 就是C(N,2) = N(N-1)/2。而对于零, 其本身就能被K整除，所以它无需和别的零值对应，总数就是N(N-1)/2 + N = N(N+1)/2。我用a[] = new int[k] 来存储每个余数的个数。</p>
+<p>此方法时间复杂度是O(N+K) 空间复杂度是（N+K）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">int</span> K = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] M = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] sum = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line"></span><br><span class="line">        sum[<span class="number">0</span>] = M[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sum.length; i++) &#123;</span><br><span class="line">            sum[i] = sum[i - <span class="number">1</span>] + M[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; sum.length; j++) &#123;</span><br><span class="line">            sum[j] = sum[j] % K;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[K];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123; <span class="comment">// sum[i] 范围 0 ~ K-1， 正好用作为a的下标</span></span><br><span class="line">            a[sum[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; K; k++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k == <span class="number">0</span>) &#123;</span><br><span class="line">                count += (a[k] * a[k] + a[k]) / <span class="number">2</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                count += (a[k] * a[k] - a[k]) / <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-发广播（30-）"><a href="#3-发广播（30-）" class="headerlink" title="3. 发广播（30%）"></a>3. 发广播（30%）</h2><p>N个广播站，站点之间有些有连接，有些没有。有连接的站点在接受到广播后会互相发送。给定一个N*N的二维数组matrix, 数组的元素都是字符’0’或者’1’。matrix[i][j]= ‘1’,则代表i和j站点之间有连接，matrixi = ‘0’代表没连接。</p>
+<p>现在要发一条广播，问初始最少给几个广播站发送，才能保证所有的广播站都收到消息</p>
+<p><strong>输入</strong>：一行数据代表二维数组的各行，用逗号分隔。保证每个字符串所含的字符数一样<br>比如：110,110, 001</p>
+<p><strong>输出</strong>：返回初始最少需要发送广播站个数</p>
+<p>可以利用DFS 和 BFS两种方式解题。</p>
+<p><strong>1.DFS</strong></p>
+<p>用DFS可以解出连通体的个数。<br>以每一个站点为起点，用visited数组标记已访问过的节点，然后进行深度优先搜索，如果M[i][j] == 1, visited[j] = 1。深度优先搜索可以把与这个起始点的所有联系的站点全部标记出来，层层递进，再由下至上返回，从而形成一个完整的连通体。每次新进入一个连通体，count就加一。连通体的个数就代表了至少要发广播的次数。与这道题类似的是 <u>LeetCode #547 Number of Provinces</u></p>
+<p>具体代码如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findCircleNum</span><span class="params">(<span class="keyword">int</span>[][] isConnected)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = isConnected.length;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] visited = <span class="keyword">new</span> <span class="keyword">int</span>[N]; <span class="comment">//notVisited 储存未被访问的广播站</span></span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>; <span class="comment">//连通块个数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited[i]==<span class="number">0</span>) &#123;</span><br><span class="line">                dfs(isConnected, i, visited);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> i, <span class="keyword">int</span>[] visited)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = matrix.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][j] == <span class="number">1</span> &amp;&amp; visited[j] == <span class="number">0</span>) &#123;</span><br><span class="line">                visited[j] = <span class="number">1</span>;</span><br><span class="line">                dfs(matrix, j, visited);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2.BFS</strong></p>
+<p>BFS是先访问某一个点以及与它连接的所有同一层级的站点，同样也是用visited标记，然后再到下一个层级访问，直到所有visited均已遍历。</p>
+<p>具体代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findCircleNum</span><span class="params">(<span class="keyword">int</span>[][] M)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] visited = <span class="keyword">new</span> <span class="keyword">int</span>[M.length];</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        Queue &lt; Integer &gt; queue = <span class="keyword">new</span> LinkedList &lt; &gt; ();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; M.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                queue.add(i);</span><br><span class="line">                <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">                    <span class="keyword">int</span> s = queue.remove();</span><br><span class="line">                    visited[s] = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; M.length; j++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (M[s][j] == <span class="number">1</span> &amp;&amp; visited[j] == <span class="number">0</span>)</span><br><span class="line">                            queue.add(j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编程考试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/15/%E5%8D%8E%E4%B8%BA%E6%9C%BA%E8%AF%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-动态规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -641,6 +746,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">常见问题解决办法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编程考试</a>
               </li>
             
             <div class="clearfix"></div>
