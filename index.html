@@ -197,9 +197,9 @@
 <li><p>if(memo[n] != null) return memo[n]</p>
 </li>
 <li><p>Ask subproblems for result</p>
-<p>a. for i in [1,n]</p>
-<p>​    i. left = dfs(i-1), right = dfs(n-i)</p>
-<p>​    ii. res += left * right;</p>
+<p><em>a. for i in [1,n]</em></p>
+<p>​    <em>i. left = dfs(i-1), right = dfs(n-i)</em></p>
+<p>​    *ii. res += left * right*</p>
 </li>
 <li><p>Update memo[n] and return res</p>
 </li>

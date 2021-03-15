@@ -16,7 +16,7 @@
 <meta property="og:description" content="动态规划解题套路模板1. 一维动态规划 dp[n]一般步骤:  Base case if(memo[n] !&#x3D; null) return memo[n] Ask subproblems for result Update memo[n] and return res  下面以 Leet Code #96. Unique Binary Search Tree 题为例:   Initialize me">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-14T01:48:35.000Z">
-<meta property="article:modified_time" content="2021-03-14T14:08:22.635Z">
+<meta property="article:modified_time" content="2021-03-15T02:02:30.385Z">
 <meta property="article:author" content="Moda Lu">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -200,9 +200,9 @@
 <li><p>if(memo[n] != null) return memo[n]</p>
 </li>
 <li><p>Ask subproblems for result</p>
-<p>a. for i in [1,n]</p>
-<p>​    i. left = dfs(i-1), right = dfs(n-i)</p>
-<p>​    ii. res += left * right;</p>
+<p><em>a. for i in [1,n]</em></p>
+<p>​    <em>i. left = dfs(i-1), right = dfs(n-i)</em></p>
+<p>​    *ii. res += left * right*</p>
 </li>
 <li><p>Update memo[n] and return res</p>
 </li>
