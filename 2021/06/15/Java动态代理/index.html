@@ -16,8 +16,14 @@
 <meta property="og:description" content="Java 动态代理在学习Java编程思想这本书中，目前遇到最难理解的部分就是动态代理了，这部分内容非常重要，它是理解通用框架底层原理的基础，所以非常重要。 代理的概念： 当你想为class A提供额外的或不同的操作的时候，因为不想修改A的源代码，因此创建了一个接口（interface）B, 让A去实现B, 继承B的方法，这么做的好处是增强了代码的扩展性和灵活性。然后在一个代理类Proxy（也同样继">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020060712350292.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607123452998.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607123441577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202006071234304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607123421221.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2021-06-15T06:33:36.000Z">
-<meta property="article:modified_time" content="2021-06-15T11:25:43.363Z">
+<meta property="article:modified_time" content="2021-06-15T11:43:59.075Z">
 <meta property="article:author" content="Moda Lu">
 <meta property="article:tag" content="Java编程思想">
 <meta name="twitter:card" content="summary">
@@ -187,12 +193,96 @@
 <p>代理的概念：</p>
 <p>当你想为class A提供额外的或不同的操作的时候，因为不想修改A的源代码，因此创建了一个接口（interface）B, 让A去实现B, 继承B的方法，这么做的好处是增强了代码的扩展性和灵活性。然后在一个代理类Proxy（也同样继承interface）里面，创建一个代理对象替代A的对象，然后进行额外的操作，这样也更好的保护住了A的内部代码，实现了将额外的操作从实际的对象中分离到别的地方去。但是这个代理方式我必须预先知道我需要代理哪些类。</p>
 <p>动态代理就是通过反射机制把多个调用重定向到单一的调用处理器上，也就是一个调用器可以动态的匹配多个被代理对象，匹配的方式就是，由反射机制来确定调用的类型，然后确定相应的方法。静态代理的代理器必须继承接口B, 如果接口一多，或者实现接口的继承类一多，这个代理器就得不断扩展，代码量不断增大，非常不方便。但动态代理的代理器只需要实现InvocationalHandler就可以去代理任何接口下的任何实际类的对象。</p>
-<p>CSDN 上有一篇文章讲述了Java动态代理，提到了代理与被代理和装饰与被装饰的关系是很相似的，下面将它原文转载过来，其中也列举一个有趣的例子。<br>————————————————<br>版权声明：本文为CSDN博主「刘小爱」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41228864/article/details/106600124">https://blog.csdn.net/qq_41228864/article/details/106600124</a></p>
-<h2 id="一-、装饰设计模式"><a href="#一-、装饰设计模式" class="headerlink" title="一 、装饰设计模式"></a>一 、装饰设计模式</h2><p>举一个现实里明星经纪人的例子：</p>
+<p>CSDN 上有一篇文章讲述了Java动态代理，提到了代理与被代理和装饰与被装饰的关系是很相似的，下面将它原文转载过来，其中也列举一个有趣的例子。<br>————————————————</p>
+<h2 id="一-、装饰设计模式（静态代理）"><a href="#一-、装饰设计模式（静态代理）" class="headerlink" title="一 、装饰设计模式（静态代理）"></a>一 、装饰设计模式（静态代理）</h2><p>举一个现实里明星经纪人的例子：</p>
 <p>现有一个明星，emm，就叫洛天依吧。</p>
 <p>明星是一种身份，很多人都可以是明星，在Java里面可以将其定义成一个接口；</p>
 <p>洛天依具体是指某个人，在Java里面可以将其定义成一个类，同时她的身份就是明星，那么实现明星接口就好了。</p>
 <h3 id="1）LuoTianYi类"><a href="#1）LuoTianYi类" class="headerlink" title="1）LuoTianYi类"></a>1）LuoTianYi类</h3><p><img src="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="①-创建star接口"><a href="#①-创建star接口" class="headerlink" title="① 创建star接口"></a>① 创建star接口</h4><p>这是一个明星接口，有三个抽象方法：</p>
+<p>唱歌sing(int money)方法，money就是出场费；</p>
+<p>跳舞dance(int money)方法，也需要对应的出场费；</p>
+<p>休息Sleep()方法。</p>
+<p>不同的明星会有不同的歌和舞，所以使用抽象方法表示。</p>
+<h4 id="②-创建LuoTianYi类"><a href="#②-创建LuoTianYi类" class="headerlink" title="② 创建LuoTianYi类"></a>② 创建LuoTianYi类</h4><p>它是一个明星，所以需要实现star接口，并重写其中的方法，说明自己会唱什么歌，会跳什么舞。</p>
+<p>好，现在问题来了，有人要请洛天依唱歌跳舞。</p>
+<p>我们都知道明星一般都会有自己的经纪人，一般都是由经纪人出面谈合作。</p>
+<p>噔噔蹬蹬，刘小爱闪亮登场了，刘小爱是谁？</p>
+<p>他是LuoTianYi的经纪人。</p>
+<h3 id="2）刘小爱类"><a href="#2）刘小爱类" class="headerlink" title="2）刘小爱类"></a>2）刘小爱类</h3><p><img src="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="①-创建刘小爱类"><a href="#①-创建刘小爱类" class="headerlink" title="① 创建刘小爱类"></a>① 创建刘小爱类</h4><p>类中有一个成员变量Star，构造方法参数为star。</p>
+<p>这是什么意思呢？</p>
+<p>刘小爱同时是很多明星的经纪人，所以他的参数为star接口，创建该类对象的时候，需要传入star接口的实现类。</p>
+<p>找那个明星合作，创建刘小爱对象时说明就好了。</p>
+<h4 id="②-重写Sing-方法"><a href="#②-重写Sing-方法" class="headerlink" title="② 重写Sing()方法"></a>② 重写Sing()方法</h4><p>现在有人要谈唱歌合作，那由刘小爱去谈价格，价格不够那不行，价格够了就让对应的明星出场唱歌。</p>
+<h4 id="③-重写Dance-方法"><a href="#③-重写Dance-方法" class="headerlink" title="③ 重写Dance()方法"></a>③ 重写Dance()方法</h4><p>同样的道理，也是价格谈判，出场费都是1万。</p>
+<h4 id="④-重写sleep-方法"><a href="#④-重写sleep-方法" class="headerlink" title="④ 重写sleep()方法"></a>④ 重写sleep()方法</h4><p>休息时间，不谈合作。</p>
+<h3 id="3）测试类"><a href="#3）测试类" class="headerlink" title="3）测试类"></a>3）测试类</h3><p><img src="https://img-blog.csdnimg.cn/2020060712350292.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>最后一切都设置好了，做一个测试：</p>
+<h4 id="①-创建刘小爱对象"><a href="#①-创建刘小爱对象" class="headerlink" title="① 创建刘小爱对象"></a>① 创建刘小爱对象</h4><p>同时说明此时要找哪位明星谈合作，哦，是LuoTianYi。</p>
+<h4 id="②-说明合作价格"><a href="#②-说明合作价格" class="headerlink" title="② 说明合作价格"></a>② 说明合作价格</h4><p>唱歌一万五，跳舞五千</p>
+<h4 id="③-控制台输出"><a href="#③-控制台输出" class="headerlink" title="③ 控制台输出"></a>③ 控制台输出</h4><p>唱歌钱够了，所以LuoTianYi开始唱歌了；</p>
+<p>跳舞钱不够，所以没有跳舞。</p>
+<p><u>刘小爱这个类就是LuoTianYi这个类的的代理：</u></p>
+<p><u>调用者找洛天依合作，其实是在和刘小爱在谈，在调用者的眼里，刘小爱就是LuoTianYi。</u></p>
+<p><u>现在合作谈拢了，由谁去执行？由LuoTianYi去执行。</u></p>
+<hr>
+<p>在IO流中，也有和其相似的情况：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200607123452998.png" alt="在这里插入图片描述"></p>
+<p>我们使用的是缓冲字符流，但是缓冲流的底层是由字符流来执行的，那么缓冲字符流就是字符流的代理。</p>
+<p>它们都对应Java中的一种设计模式，叫<strong>装饰设计模式：</strong></p>
+<ul>
+<li>装饰者：缓冲字符流、刘小爱就是装饰者；</li>
+<li>被装饰者：字符流、洛天依就是被装饰者；</li>
+<li>装饰者将被装饰者的方法增强了</li>
+</ul>
+<p>该设计模式其实和Java中的继承很相似：</p>
+<p>父类就相当于被装饰者；子类就相当于装饰者；子类重写方法就是在增强父类的方法。</p>
+<p>只不过该设计模式在代码层面比继承更具有拓展性。</p>
+<p>学习了装饰设计模式，接着开始动态代理的学习。</p>
+<h2 id="二、动态代理"><a href="#二、动态代理" class="headerlink" title="二、动态代理"></a>二、动态代理</h2><p>装饰设计模式和动态代理很相似，它是一种静态代理。</p>
+<p>如何理解静态和动态？</p>
+<ul>
+<li>静态：代理类是创建了的，比如例子中的刘小爱；</li>
+<li>动态：代理类是不用创建的。</li>
+</ul>
+<p>在Java里有一个类叫Proxy，翻译过来就是代理的意思。</p>
+<p>用这个类可以动态构建一个代理类对象：</p>
+<p>使用 **newProxyInstance() **方法，该方法是一个静态方法，所以用类名直接可以调用。</p>
+<p>将该方法拆分记忆：new 创建；Proxy 代理；Instance 实例化；也就是创建代理对象，很好记。</p>
+<p>现在我们来仔细分析该方法的三个参数，看源码：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200607123441577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="①-ClassLoader-loader"><a href="#①-ClassLoader-loader" class="headerlink" title="① ClassLoader loader"></a>① ClassLoader loader</h4><p>ClassLoader，类加载器，昨天就接触过。</p>
+<p>我们写的类，本质上是.java文件，同时开发工具会自动编译成.class文件，但它们都是存放在硬盘上的。</p>
+<p>而类加载器就是将类加载进内存，这样才能够运行。</p>
+<h4 id="②-Class-lt-gt-interfaces"><a href="#②-Class-lt-gt-interfaces" class="headerlink" title="② Class&lt;?&gt;[] interfaces"></a>② Class&lt;?&gt;[] interfaces</h4><p>interfaces，接口的意思。我个人学Java的一个习惯是先理解这个英文单词是什么意思再去记忆其作用。</p>
+<p>并且很多命名规则都是见名知意的。</p>
+<p>这个参数就是接口对应的Class对象，什么接口？就是被代理类实现的接口，因为它可以实现很多个接口，所以是一个数组。</p>
+<h4 id="③-InvocationHandler-h"><a href="#③-InvocationHandler-h" class="headerlink" title="③ InvocationHandler h"></a>③ InvocationHandler h</h4><p><strong>InvocationHandle</strong>，翻译过来就是调用处理器。</p>
+<p>它是一个接口，我们继续看它的源码：</p>
+<p><img src="https://img-blog.csdnimg.cn/202006071234304.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>该接口只有一个方法invoke：</p>
+<ul>
+<li>proxy：这个就是代理对象</li>
+<li>method：这个也就是代理对象调用的方法（例子中的sing方法、dance方法、sleep方法）</li>
+<li>args：这个是方法中的参数</li>
+</ul>
+<p>好，以上就是对newProxyInstance()方法的说明，完全弄懂了这个方法，也就弄懂了动态代理。</p>
+<p>我们现在将代码补全：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200607123421221.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="①-被代理类的类加载器"><a href="#①-被代理类的类加载器" class="headerlink" title="① 被代理类的类加载器"></a>① 被代理类的类加载器</h4><p>被代理类是谁？例子中就是LuoTianYi，首先要获取它对应的Class对象。</p>
+<p>ty.getClass()：三种获取Class对象之一，ly是LuoTianYi的对象，利用对象ly的getClass方法。</p>
+<p>拿到其对应的Class对象后，可以调用getClassLoader()方法获取对应的类加载器。</p>
+<p>Java里面的很多方法看名字就能知道它的作用是什么。</p>
+<p>所以ty.getClass().getClassLoader()就是获取被代理类LuoTianYi的类加载器.</p>
+<h4 id="②-被代理类所实现的接口"><a href="#②-被代理类所实现的接口" class="headerlink" title="② 被代理类所实现的接口"></a>② 被代理类所实现的接口</h4><p>同样的道理，见名知意：</p>
+<p>ty.getClass().getInterface()就是获取被代理类实现的接口对应的Class对象，例子中就是star这个接口。</p>
+<h4 id="③-调用处理器"><a href="#③-调用处理器" class="headerlink" title="③ 调用处理器"></a>③ 调用处理器</h4><p>这是一个接口，所以使用匿名内部类创建其实现类对象，同时重写接口中的invoke方法。</p>
+<p>这块代码的编写，其实也就是例子中刘小爱这个类对star接口中的三个抽象方法的重写。</p>
+<p>这是具体的业务逻辑，根据不同的需求编写不同的代码，其它的代码都是基本不变的。</p>
+<p>其中method这个参数：proxy调用什么方法时，method就是对应的方法，根据这个我们可以在其中填上方法的具体的业务逻辑。</p>
+<h4 id="④-代理类对象-proxy"><a href="#④-代理类对象-proxy" class="headerlink" title="④ 代理类对象 proxy"></a>④ 代理类对象 proxy</h4><p>代理类LiuXiaoAi我们是没有创建的，所以用的是它的父接口star来接受代理类对象，这是多态。</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「刘小爱」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41228864/article/details/106600124">https://blog.csdn.net/qq_41228864/article/details/106600124</a></p>
 
       
 
