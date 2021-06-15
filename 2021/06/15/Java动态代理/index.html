@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://modalu.github.io">
-  <title>Tag: Algorithm | Moda&#39;s Blog</title>
+  <title>Java动态代理 | Moda&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Moda&#39;s Blog">
-<meta property="og:url" content="https://modalu.github.io/tags/Algorithm/index.html">
+  <meta name="description" content="Java 动态代理在学习Java编程思想这本书中，目前遇到最难理解的部分就是动态代理了，这部分内容非常重要，它是理解通用框架底层原理的基础，所以非常重要。 代理的概念： 当你想为class A提供额外的或不同的操作的时候，因为不想修改A的源代码，因此创建了一个接口（interface）B, 让A去实现B, 继承B的方法，这么做的好处是增强了代码的扩展性和灵活性。然后在一个代理类Proxy（也同样继">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java动态代理">
+<meta property="og:url" content="https://modalu.github.io/2021/06/15/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
 <meta property="og:site_name" content="Moda&#39;s Blog">
+<meta property="og:description" content="Java 动态代理在学习Java编程思想这本书中，目前遇到最难理解的部分就是动态代理了，这部分内容非常重要，它是理解通用框架底层原理的基础，所以非常重要。 代理的概念： 当你想为class A提供额外的或不同的操作的时候，因为不想修改A的源代码，因此创建了一个接口（interface）B, 让A去实现B, 继承B的方法，这么做的好处是增强了代码的扩展性和灵活性。然后在一个代理类Proxy（也同样继">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-06-15T06:33:36.000Z">
+<meta property="article:modified_time" content="2021-06-15T11:25:43.363Z">
 <meta property="article:author" content="Moda Lu">
+<meta property="article:tag" content="Java编程思想">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Moda&#39;s Blog" type="application/atom+xml">
   
@@ -156,150 +163,176 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java动态代理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="archive-article-date">
-  	<time datetime="2021-03-14T01:48:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    <h1 class="article-title" itemprop="name">
+      Java动态代理
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2021/06/15/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-06-15T06:33:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-动态代理"><a href="#Java-动态代理" class="headerlink" title="Java 动态代理"></a>Java 动态代理</h1><p>在学习Java编程思想这本书中，目前遇到最难理解的部分就是动态代理了，这部分内容非常重要，它是理解通用框架底层原理的基础，所以非常重要。</p>
+<p>代理的概念：</p>
+<p>当你想为class A提供额外的或不同的操作的时候，因为不想修改A的源代码，因此创建了一个接口（interface）B, 让A去实现B, 继承B的方法，这么做的好处是增强了代码的扩展性和灵活性。然后在一个代理类Proxy（也同样继承interface）里面，创建一个代理对象替代A的对象，然后进行额外的操作，这样也更好的保护住了A的内部代码，实现了将额外的操作从实际的对象中分离到别的地方去。但是这个代理方式我必须预先知道我需要代理哪些类。</p>
+<p>动态代理就是通过反射机制把多个调用重定向到单一的调用处理器上，也就是一个调用器可以动态的匹配多个被代理对象，匹配的方式就是，由反射机制来确定调用的类型，然后确定相应的方法。静态代理的代理器必须继承接口B, 如果接口一多，或者实现接口的继承类一多，这个代理器就得不断扩展，代码量不断增大，非常不方便。但动态代理的代理器只需要实现InvocationalHandler就可以去代理任何接口下的任何实际类的对象。</p>
+<p>CSDN 上有一篇文章讲述了Java动态代理，提到了代理与被代理和装饰与被装饰的关系是很相似的，下面将它原文转载过来，其中也列举一个有趣的例子。<br>————————————————<br>版权声明：本文为CSDN博主「刘小爱」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41228864/article/details/106600124">https://blog.csdn.net/qq_41228864/article/details/106600124</a></p>
+<h2 id="一-、装饰设计模式"><a href="#一-、装饰设计模式" class="headerlink" title="一 、装饰设计模式"></a>一 、装饰设计模式</h2><p>举一个现实里明星经纪人的例子：</p>
+<p>现有一个明星，emm，就叫洛天依吧。</p>
+<p>明星是一种身份，很多人都可以是明星，在Java里面可以将其定义成一个接口；</p>
+<p>洛天依具体是指某个人，在Java里面可以将其定义成一个类，同时她的身份就是明星，那么实现明星接口就好了。</p>
+<h3 id="1）LuoTianYi类"><a href="#1）LuoTianYi类" class="headerlink" title="1）LuoTianYi类"></a>1）LuoTianYi类</h3><p><img src="https://img-blog.csdnimg.cn/20200607123510299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjI4ODY0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java编程思想</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://modalu.github.io/2021/06/15/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/02/%E6%B8%85%E6%98%8E%E5%A4%A7%E5%AD%A6%E6%B8%B8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">清明大学游</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/02/hashtable/" class="archive-article-date">
-  	<time datetime="2020-10-02T01:50:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-02</time>
-</a>
-        </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/02/hashtable/">hashtable</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/02/8puzzle/" class="archive-article-date">
-  	<time datetime="2020-10-02T01:43:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/02/8puzzle/">8puzzle</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习作业</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -323,9 +356,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
